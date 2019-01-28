@@ -15,8 +15,49 @@ var QRCode = require('qrcode')
 
 app.use(bodyParser.json({ type: 'application/json' }));
 app.use(express.static(__dirname + '/../react-client/dist'));
-// app.use('/', express.static('../react-client/dist/'));
 
+
+app.get('/api/qrcodes', (req, res) => {
+  getQRCodes((error, results) => {
+    if (error) {
+      console.log(error, 'Error SERVER GET!?!?!');
+      res.status(500).send(error);
+    } else {
+      console.log(results, 'results from server GET!!');
+      res.json(results);
+      // this sends back the results as JSON
+    }
+  });
+});
+
+app.post('/api/qrcodes', (req, res) => {
+  postQRCodes(req.body, (error, results) => {
+    if (error) {
+      console.log(error, 'Error on server POST! Adding QRCode');
+      res.status(500).send(error)
+    } else { }
+    console.log(results, 'Results from Server POST!?!?');
+    res.json(results);
+  });
+});
+
+app.put('/api/qrcodes', (req, res) => {
+  console.log(req.body, 'Checking SERVER PUT?1?!?!?');
+
+  selectedQRCode(req.body, (error, results) => {
+    if (error) {
+      console.log(error, 'Error with PUT on SERVER!?!');
+      res.status(500).send(error);
+    } else {
+      console.log(results, 'Results from PUT!?!?!?');
+      res.json(results);
+    }
+  });
+});
+
+// app.delete() {
+
+// }
 
 
 
