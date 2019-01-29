@@ -25,3 +25,24 @@
   background-color: #4CAF50;
   color: white;
 }
+
+.category-form {
+  margin-top: 2px;
+  display: flex;
+  flex-flow: column;
+}
+
+.category-list {
+  background-color: #00a07b;
+  color: white;
+  margin-top: 50px;
+}
+
+.category-data {
+  padding: 0.5em;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0px;
+  white-space: nowrap;
+}

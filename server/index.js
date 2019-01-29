@@ -2,15 +2,15 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const { } = require('../database/index.js');
+const { getQRCodes, postQRCodes, updateQRCode, deleteQRCode } = require('../database/index.js');
 const path = require('path');
 const port = 3005;
 var QRCode = require('qrcode')
 
+
 // QRCode.toDataURL('I am a pony!', function (err, url) {
 //   console.log(url, 'is this a thing or nah?')
 // })
-
 
 
 app.use(bodyParser.json({ type: 'application/json' }));
@@ -30,6 +30,8 @@ app.get('/api/qrcodes', (req, res) => {
   });
 });
 
+
+
 app.post('/api/qrcodes', (req, res) => {
   postQRCodes(req.body, (error, results) => {
     if (error) {
@@ -41,10 +43,13 @@ app.post('/api/qrcodes', (req, res) => {
   });
 });
 
+
+
 app.put('/api/qrcodes', (req, res) => {
   console.log(req.body, 'Checking SERVER PUT?1?!?!?');
+  console.log(req.params, 'This shouldnt contain data body does?');
 
-  selectedQRCode(req.body, (error, results) => {
+  updateQRCode(req.body, (error, results) => {
     if (error) {
       console.log(error, 'Error with PUT on SERVER!?!');
       res.status(500).send(error);
@@ -55,9 +60,22 @@ app.put('/api/qrcodes', (req, res) => {
   });
 });
 
-// app.delete() {
 
-// }
+
+app.delete('/api/qrcodes/:id', (req, res) => {
+  console.log(req.body, 'Req BODY is what here?');
+  console.log(req.params, 'Params is the actual data tho!');
+
+  deleteQRCode(req.params, (error, results) => {
+    if (error) {
+      console.log(error, 'Error on Server Delete!');
+      res.status(500).send(error);
+    } else {
+      console.log(results, 'Results from server Delete!?');
+      res.json(results);
+    }
+  })
+})
 
 
 
