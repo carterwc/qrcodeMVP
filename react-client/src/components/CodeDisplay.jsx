@@ -15,7 +15,7 @@ const CodeDisplay = (props) => {
           //   return <div className="category-data" key={code.id}>{code}</div>
           // })
 
-          <img src={props.currentCode} />
+          <img src={props.sampleCode} />
         }
 
       </div>

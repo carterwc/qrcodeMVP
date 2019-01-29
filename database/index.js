@@ -21,7 +21,7 @@ const getQRCodes = function (callback) {
 }
 
 const postQRCodes = function (params, callback) {
-  connection.query('INSERT INTO qr() values()',
+  connection.query('INSERT INTO qr(qrcode, createdDate, expiresDate, createdBy) values(?, ?, ?, ?)',
     [params.qrcode, params.createdDate, params.expiresDate, params.createdBy],
     (error, results) => {
       if (error) {
