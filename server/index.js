@@ -33,13 +33,18 @@ app.get('/api/qrcodes', (req, res) => {
 
 
 app.post('/api/qrcodes', (req, res) => {
+  console.log(req.body, 'We on server or nah?')
+  console.log(req.params, 'PARAMS????/?')
+  console.log(req.query, 'Are we here???????')
+
   postQRCodes(req.body, (error, results) => {
     if (error) {
       console.log(error, 'Error on server POST! Adding QRCode');
       res.status(500).send(error)
-    } else { }
-    console.log(results, 'Results from Server POST!?!?');
-    res.json(results);
+    } else {
+      console.log(results, 'Results from Server POST!?!?');
+      res.json(results);
+    }
   });
 });
 

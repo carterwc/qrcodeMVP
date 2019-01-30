@@ -20,9 +20,10 @@ const getQRCodes = function (callback) {
   })
 }
 
-const postQRCodes = function (params, callback) {
-  connection.query('INSERT INTO qr(qrcode, createdDate, expiresDate, createdBy) values(?, ?, ?, ?)',
-    [params.qrcode, params.createdDate, params.expiresDate, params.createdBy],
+const postQRCodes = function (body, callback) {
+  console.log(body, 'are we coming from server??')
+  connection.query(`INSERT INTO qr(qrcode, createdDate, expiresDate, createdBy) values(?, ?, ?, ?)`,
+    [body.qrcode, body.createdDate, body.expiresDate, body.createdBy],
     (error, results) => {
       if (error) {
         console.log(error, 'Error POSTING QR Code DB!');
